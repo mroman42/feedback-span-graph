@@ -6,6 +6,9 @@ This is a library of open transition systems. The library allows us to declare a
 
 For instance, the following code,
 
+#+caption: String diagram for the NOR latch.
+[[file:norlatch.jpg]]
+
 #+begin_src haskell
 norLatch :: Spans '[Bool,Bool] '[Bool,Bool]
 norLatch =
