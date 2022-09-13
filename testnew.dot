@@ -1,0 +1,27 @@
+digraph norlatch {
+layout=neato;
+fontname="Helvetica,Arial,sans-serif"
+node [fontname="Helvetica,Arial,sans-serif"]
+edge [fontname="Helvetica,Arial,sans-serif"]
+rankdir=RL;
+pad = 0.2;
+{
+node [shape=circle];
+0 -> 3[label=Idle, constraint=false, minlen=2, tailport=n, headport=n]
+0 -> 2[label=Reset, constraint=false, minlen=2, tailport=n, headport=n]
+0 -> 1[label=Set, constraint=false, minlen=2, tailport=n, headport=n]
+0 -> 0[label=Unspec, constraint=false, minlen=2, tailport=n, headport=n]
+1 -> 1[label=Idle, constraint=false, minlen=2, tailport=n, headport=n]
+1 -> 0[label=Reset, constraint=false, minlen=2, tailport=n, headport=n]
+1 -> 1[label=Set, constraint=false, minlen=2, tailport=n, headport=n]
+1 -> 0[label=Unspec, constraint=false, minlen=2, tailport=n, headport=n]
+2 -> 2[label=Idle, constraint=false, minlen=2, tailport=n, headport=n]
+2 -> 2[label=Reset, constraint=false, minlen=2, tailport=n, headport=n]
+2 -> 0[label=Set, constraint=false, minlen=2, tailport=n, headport=n]
+2 -> 0[label=Unspec, constraint=false, minlen=2, tailport=n, headport=n]
+3 -> 0[label=Idle, constraint=false, minlen=2, tailport=n, headport=n]
+3 -> 0[label=Reset, constraint=false, minlen=2, tailport=n, headport=n]
+3 -> 0[label=Set, constraint=false, minlen=2, tailport=n, headport=n]
+3 -> 0[label=Unspec, constraint=false, minlen=2, tailport=n, headport=n]
+}
+}

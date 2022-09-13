@@ -1,0 +1,27 @@
+digraph norlatch {
+pad = 0.2;
+nodesep = 0.5;
+layout=circo;
+graph [fontsize=16 label="Nor Latch" rankdir=BT]
+node [fontname=Iosevka fontsize=30 margin=0.1 shape=square]
+edge [arrowhead=open fontname=Iosevka fontsize=14 style=dashed tailport=c]
+forcelabels=true;
+overlap=false;
+
+0 -> 3[xlabel=Idle];
+0 -> 2[xlabel=Reset];
+0 -> 1[xlabel=Set];
+0 -> 0[xlabel=Unspec];
+1 -> 1[xlabel=Idle];
+1 -> 0[xlabel=Reset];
+1 -> 1[xlabel=Set];
+1 -> 0[xlabel=Unspec];
+2 -> 2[xlabel=Idle];
+2 -> 2[xlabel=Reset];
+2 -> 0[xlabel=Set];
+2 -> 0[xlabel=Unspec];
+3 -> 0[xlabel=Idle];
+3 -> 0[xlabel=Reset];
+3 -> 0[xlabel=Set];
+3 -> 0[xlabel=Unspec];
+}

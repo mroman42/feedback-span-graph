@@ -1,0 +1,35 @@
+digraph norlatch {
+node [shape=circle];
+Idle03 [label="Idle", shape=none];
+0 -> Idle03 -> 3
+Reset02 [label="Reset", shape=none];
+0 -> Reset02 -> 2
+Set01 [label="Set", shape=none];
+0 -> Set01 -> 1
+Unspec00 [label="Unspec", shape=none];
+0 -> Unspec00 -> 0
+Idle11 [label="Idle", shape=none];
+1 -> Idle11 -> 1
+Reset10 [label="Reset", shape=none];
+1 -> Reset10 -> 0
+Set11 [label="Set", shape=none];
+1 -> Set11 -> 1
+Unspec10 [label="Unspec", shape=none];
+1 -> Unspec10 -> 0
+Idle22 [label="Idle", shape=none];
+2 -> Idle22 -> 2
+Reset22 [label="Reset", shape=none];
+2 -> Reset22 -> 2
+Set20 [label="Set", shape=none];
+2 -> Set20 -> 0
+Unspec20 [label="Unspec", shape=none];
+2 -> Unspec20 -> 0
+Idle30 [label="Idle", shape=none];
+3 -> Idle30 -> 0
+Reset30 [label="Reset", shape=none];
+3 -> Reset30 -> 0
+Set30 [label="Set", shape=none];
+3 -> Set30 -> 0
+Unspec30 [label="Unspec", shape=none];
+3 -> Unspec30 -> 0
+}
