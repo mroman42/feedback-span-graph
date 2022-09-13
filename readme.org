@@ -1,12 +1,32 @@
-#+TITLE: Unbiased Arrows
+#+TITLE: 
 
-*Why?* Arrows in Haskell capture theories of processes as premonoidal categories
-with an identity-on-objects premonoidal functor from Sets (the so-called Freyd
-categories).
+* Span Graph via the State Construction
 
-The problem with arrows is that you need to input coherence morphisms by
-hand. The following is some code I wrote. The real diagram is on the left, but
-on the right we have a bunch of coherence morhpisms.
+This is a library of open transition systems. The library allows us to declare a morphism in Span(Graph) as a string diagram (using a dedicated DSL for Haskell) and compile it to a transition system. 
+
+For instance, the following code,
+
+#+begin_src haskell
+norLatch :: Spans '[Bool,Bool] '[Bool,Bool]
+norLatch =
+  ((>)) wire |*| codiscard |*| codiscard |*| wire
+   |>|  wire |*|   copy    |*|   copy    |*| wire
+   |>|       nor     |*| swap  |*|       nor
+   |>|    copy  |*| wire   |*|  wire |*|  copy
+   |>|  wire |*| cocopy    |*|   cocopy |*|  wire
+   |>|  wire |*| discard   |*|  discard |*|  wire
+#+end_src
+
+constructs the NOR latch from its basic components. The resulting transition system can be then depicted using the library to be the following.
+
+#+caption: Transition system for the NOR latch.
+[[file:out.jpg]]
+
+* Unbiased Arrows
+
+*Why?* Arrows in Haskell capture theories of processes as premonoidal categories with an identity-on-objects premonoidal functor from Sets (the so-called Freyd categories).
+
+The problem with arrows is that you need to input coherence morphisms by hand. The following is some code I wrote. The real diagram is on the left, but on the right we have a bunch of coherence morhpisms.
 
  #+begin_src haskell
 ehrenfest = fbk                                 $ runitS>>> lunitinv *** lunitinv
@@ -19,23 +39,17 @@ ehrenfest = fbk                                 $ runitS>>> lunitinv *** lunitin
   >>> idS *** (sigma *** idS)                >>> idS *** associnv >>> assoc
  #+end_src
 
-It would be better if the computer would write these coherence morphisms for us.
-This is the purpose of this library. Using the library, the following diagram compiles.
+It would be better if the computer would write these coherence morphisms for us. This is the purpose of this library. Using the library, the following diagram compiles.
 
 #+begin_src haskell
-norLatch :: Span '[Bool,Bool] '[Bool,Bool]
-norLatch =
-  ((>)) wire |*| codiscard |*| codiscard |*| wire
-   |>|  wire |*|   copy    |*|   copy    |*| wire
-   |>|       nor     |*| swap  |*|       nor
-   |>|    copy  |*| wire   |*|  wire |*|  copy
-   |>|  wire |*| cocopy    |*|   cocopy |*|  wire
-   |>|  wire |*| discard   |*|  discard |*|  wire
+diagramSpan :: Spans '[Bool] '[Bool]
+diagramSpan =
+  ((>))  codiscard  |*|  wire
+   |>|      copy    |*|  wire
+   |>|   wire  |*|  nor
+   |>|   wire  |*|  copy
+   |>|      cocopy  |*|  wire
+   |>|      discard |*|  wire
 #+end_src
 
-Set-based Freyd-categories are just very particular cases of the notion of
-premonoidal category: conjunctive queries, spans of graphs or vector spaces are
-examples of premonoidal category. If we want to be able to capture all of these,
-we need to be able to surpass the restriction saying that Arrows may have the
-same objects as normal functions. For this, we also introduce =Premonoidal= as an
-Arrow possibly constrained on objects.
+Set-based Freyd-categories are just very particular cases of the notion of premonoidal category: conjunctive queries, spans of graphs or vector spaces are examples of premonoidal category. If we want to be able to capture all of these, we need to be able to surpass the restriction saying that Arrows may have the same objects as normal functions. For this, we also introduce =Premonoidal= as an Arrow possibly constrained on objects.
